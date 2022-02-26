@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             JwtTokenSeeder::class,
             FileSeeder::class,
+            OrderStatusSeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }
