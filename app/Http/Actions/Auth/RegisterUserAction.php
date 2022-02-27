@@ -16,7 +16,12 @@ class RegisterUserAction
     public function execute(RegisterUserRequest $request)
     {
         $user = $this->saveDetails($request);
-        return $this->createdResponse('User registration created successfully', new RegisterResource($user));
+
+        if (!$user) {
+            return $this->badRequestAlert('User could not be created, please retry');
+        }
+
+        return $user;
     }
 
     private function saveDetails($payload)
@@ -28,9 +33,8 @@ class RegisterUserAction
             'phone_number' => $payload->phone_number,
             'address' => $payload->address,
             'avatar' => $payload->avatar,
-            'is_marketing' => ($payload->is_marketing) ? $payload->is_marketing : false,
+            'is_marketing' => ($payload->is_marketing) ? $payload->is_marketing : 0,
             'uuid' => Str::uuid(),
-            'email_verified_at' => now(),
             'password' => Hash::make($payload->password),
         ]);
     }
