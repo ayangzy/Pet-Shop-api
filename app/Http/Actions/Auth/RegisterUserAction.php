@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 use App\Traits\ApiResponses;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterUserRequest;
-use App\Http\Resources\RegisterResource;
 
 class RegisterUserAction
 {

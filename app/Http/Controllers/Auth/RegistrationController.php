@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Actions\Auth\RegisterUserAction;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterUserRequest;
-use App\Http\Resources\RegisterResource;
 use App\Traits\ApiResponses;
+use App\Http\Actions\Token\JwtToken;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\RegisterResource;
+use App\Http\Requests\RegisterUserRequest;
+use App\Http\Actions\Auth\RegisterUserAction;
 
 class RegistrationController extends Controller
 {
@@ -57,10 +58,10 @@ class RegistrationController extends Controller
      * )
      */
 
-    public function register(RegisterUserRequest $request )
+    public function register(RegisterUserRequest $request)
     {
         $user = (new RegisterUserAction())->execute($request);
-        
-        return $this->successResponse('User registration created successfully', new RegisterResource($user));
+        $user->token =  (new JwtToken())->token($user);
+        return $this->createdResponse('User registration created successfully', new RegisterResource($user));
     }
 }

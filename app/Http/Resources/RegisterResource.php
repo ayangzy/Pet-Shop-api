@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Actions\Token\JwtToken;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RegisterResource extends JsonResource
@@ -25,6 +26,7 @@ class RegisterResource extends JsonResource
             'is_marketing' => $this->is_marketing,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'token' => $this->token,
         ];
     }
 }

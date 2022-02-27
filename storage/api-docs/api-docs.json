@@ -11,7 +11,7 @@
                 "tags": [
                     "User"
                 ],
-                "summary": "User Register",
+                "summary": "Create a user account",
                 "description": "User Registration",
                 "operationId": "Register",
                 "requestBody": {

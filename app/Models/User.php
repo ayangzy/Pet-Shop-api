@@ -39,6 +39,11 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function jwtToken()
+    {
+        return $this->hasOne(JwtToken::class);
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -56,7 +61,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            "user_uuid" => $this->uuid
+        ];
     }
 
     public function orders()
