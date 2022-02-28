@@ -3,10 +3,10 @@
 namespace App\Http\Actions\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use App\Traits\ApiResponses;
 use App\Http\Requests\LoginRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
-
 
 class LoginAction
 {
@@ -18,8 +18,8 @@ class LoginAction
 
         try {
             if (!$token = auth()->attempt($credentials)) {
-                
-                abort($this->unauthorisedRequestAlert('Authentication failed'));
+
+                abort($this->unauthorisedRequestAlert('Login credentials are invalid'));
             }
 
             $user = $this->findUser($request);
@@ -29,9 +29,10 @@ class LoginAction
                 'token' => $token,
             ];
             $this->updateUserLog($user);
+            $this->updateOrCreateJwtToken($user);
             return  $authUser;
         } catch (JWTException $exception) {
-            logger('An error occred processsing request', [$exception->getMessage()]);
+            logger('Unable to create token.', [$exception->getMessage()]);
         }
     }
 
@@ -51,5 +52,24 @@ class LoginAction
         return $user->update([
             'last_login_at' => now(),
         ]);
+    }
+
+
+    /**
+     * @param User $user
+     * 
+     * @return object
+     */
+    private function updateOrCreateJwtToken(User $user): object
+    {
+        $jwtToken = $user->jwtToken()->updateOrCreate(
+            ['user_id' => $user->id,],
+            [
+                'unique_id' => Str::uuid(),
+                'token_title' => "User login authentication",
+            ]
+        );
+
+        return $jwtToken;
     }
 }
