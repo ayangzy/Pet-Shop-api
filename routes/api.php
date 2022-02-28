@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegistrationController;
 use Illuminate\Http\Request;
@@ -24,5 +25,6 @@ Route::prefix('v1')->group(function(){
     Route::prefix('user')->name('user.')->group(function(){
         Route::post('/create', [RegistrationController::class, 'register'])->name('register');
         Route::post('/login', [LoginController::class, 'login'])->name('login');
+        Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPassword'])->name('forgotPassword');
     });
 });
