@@ -8,6 +8,7 @@ use App\Http\Controllers\User\OrderListController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditProfileController;
 use App\Http\Controllers\Auth\RegistrationController;
+use App\Http\Controllers\Admin\AdminListUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\Admin\AdminLoginController;
 use App\Http\Controllers\Auth\ResetPasswordTokenController;
@@ -44,6 +45,6 @@ Route::prefix('v1')->group(function(){
     
     Route::prefix('admin')->group(function () {
         Route::post('/login', [AdminLoginController::class, 'adminLogin'])->name('adminLogin');
-        
+        Route::get('/user-listing', [AdminListUserController::class, 'listUser'])->name('listUser')->middleware('is_admin');
     });
 });
