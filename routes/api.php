@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Admin\AdminListUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\Admin\AdminLoginController;
+use App\Http\Controllers\Product\CreateProductController;
 use App\Http\Controllers\Auth\ResetPasswordTokenController;
 
 /*
@@ -47,4 +48,14 @@ Route::prefix('v1')->group(function(){
         Route::post('/login', [AdminLoginController::class, 'adminLogin'])->name('adminLogin');
         Route::get('/user-listing', [AdminListUserController::class, 'listUser'])->name('listUser')->middleware('is_admin');
     });
+
+    Route::group(['middleware' => ['jwt.verify', 'is_admin']], static function () {
+        Route::prefix('/product')->name('product.')->group(function () {
+            Route::post('/create', [CreateProductController::class, 'store'])->name('create');
+            Route::put('/{uuid}', [UpdateProductController::class, 'update'])->name('update');
+            Route::delete('/{uuid}', [DeleteProductController::class, 'delete'])->name('delete');
+        });
+    });
+   
+
 });
