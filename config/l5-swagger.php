@@ -5,7 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'L5 Swagger UI',
+                'title' => 'Pet shop AP Documentation',
             ],
 
             'routes' => [
@@ -147,6 +147,15 @@ return [
         */
         'securityDefinitions' => [
             'securitySchemes' => [
+
+                'bearer_token' => [ // Unique name of security
+                    'type' => 'http', // Valid values are "basic", "http", "apiKey" or "oauth2".
+                    "scheme" => "bearer",
+                    'description' => 'Enter token in format (Bearer <token>)',
+                    'name' => 'Authorization', // The name of the header or query parameter to be used.
+                    'in' => 'header', // The location of the API key. Valid values are "query" or "header".
+                 ],
+                 
                 /*
                  * Examples of Security schemes
                 */

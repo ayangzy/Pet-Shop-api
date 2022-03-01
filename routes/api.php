@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\RegistrationController;
-use App\Http\Controllers\Auth\ResetPasswordTokenController;
-use App\Http\Controllers\User\DeleteUserController;
-use App\Http\Controllers\User\EditProfileController;
-use App\Http\Controllers\User\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\OrderListController;
+use App\Http\Controllers\User\DeleteUserController;
+use App\Http\Controllers\User\EditProfileController;
+use App\Http\Controllers\Auth\RegistrationController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,7 @@ Route::prefix('v1')->group(function(){
             Route::put('/edit', [EditProfileController::class, 'editProfile'])->name('editProfile');
             Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
             Route::delete('/', [DeleteUserController::class, 'delete'])->name('delete');
+            Route::get('/orders', [OrderListController::class, 'show'])->name('order');
         });
     });
     
