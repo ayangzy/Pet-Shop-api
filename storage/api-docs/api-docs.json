@@ -6,12 +6,66 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/v1/user/forget-password": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create token for resetting  Password",
+                "description": "Request password reset token",
+                "operationId": "forgetPassword",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "A token has been sent to this email address to reset your password",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1/user/login": {
             "post": {
                 "tags": [
                     "User"
                 ],
-                "summary": "LoginUser Login",
+                "summary": "User Login",
                 "description": "User Login here",
                 "operationId": "Login",
                 "requestBody": {
@@ -125,6 +179,72 @@
                 "responses": {
                     "201": {
                         "description": "User registration created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/user/reset-password-token": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Provide token and change your password",
+                "description": "User Change password",
+                "operationId": "resetPassword",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "token",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "text"
+                                    },
+                                    "email": {
+                                        "type": "text"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password reset Successfully",
                         "content": {
                             "application/json": {
                                 "schema": {}

@@ -2,36 +2,40 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Actions\Auth\ForgotPasswordAction;
+use App\Http\Actions\Auth\ResetPasswordAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ForgotPasswordRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Traits\ApiResponses;
 use Illuminate\Http\Request;
 
-class ForgotPasswordController extends Controller
+class ResetPasswordTokenController extends Controller
 {
     use ApiResponses;
+
     /**
      * @OA\Post(
-     * path="/api/v1/user/forget-password",
-     * operationId="forgetPassword",
+     * path="/api/v1/user/reset-password-token",
+     * operationId="resetPassword",
      * tags={"User"},
-     * summary="Create token for resetting  Password",
-     * description="Request password reset token",
+     * summary="Provide token and change your password",
+     * description="User Change password",
      *     @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
      *            mediaType="application/x-www-form-urlencoded",
      *            @OA\Schema(
      *               type="object",
-     *               required={"email"},
+     *               required={"token", "email", "password", "password_confirmation"},
+     *               @OA\Property(property="token", type="text"),
      *               @OA\Property(property="email", type="text"),
+     *               @OA\Property(property="password", type="password"),
+     *               @OA\Property(property="password_confirmation", type="password"),
      *            ),
      *        ),
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="A token has been sent to this email address to reset your password",
+     *          description="Password reset Successfully",
      *          @OA\JsonContent()
      *       ),
      *      @OA\Response(
@@ -44,13 +48,11 @@ class ForgotPasswordController extends Controller
      * )
      */
 
-    public function forgotPassword(ForgotPasswordRequest $request, ForgotPasswordAction $forgotPasswordAction)
+    public function resetPassword(ResetPasswordRequest $request, ResetPasswordAction $resetPasswordAction)
     {
 
-        $forgotPasswordAction->execute($request);
+        $resetPasswordAction->execute($request);
 
-        $message = 'A token has been sent to this email address to reset your password';
-
-        return $this->successResponse($message);
+        return $this->successResponse('Password reset successfully.');
     }
 }
