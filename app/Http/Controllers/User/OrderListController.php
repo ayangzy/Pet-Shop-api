@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Order;
 use App\Traits\ApiResponses;
+use App\Http\Actions\ListActions;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\OrderListResource;
@@ -63,9 +64,19 @@ class OrderListController extends Controller
      */
     public function show()
     {
-        $orders = Order::with(['orderStatus', 'payment'])->where('user_id', Auth::id())->paginate(10);
-        $userOrderResource = OrderListResource::collection($orders);
-        $orders->data = $userOrderResource;
-        return $this->successResponse('User orders retrieved successfully', $orders);
+        $orders = (new ListActions(Order::class, 'orders'))->sortWithAuth();
+
+        return $this->successResponse('User orders retrieved successfully', [
+            'orders' => OrderListResource::collection($orders),
+            'first_page_url' => $orders->url(1),
+            'from' => $orders->firstItem(),
+            'per_page' => $orders->perPage(),
+            'prev_page_url' => $orders->previousPageUrl(),
+            'next_page_url' => $orders->nextPageUrl(),
+            'last_page' => $orders->lastPage(),
+            'to' => $orders->lastItem(),
+            'total' => $orders->total(),
+
+        ]);
     }
 }
