@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\ResetPasswordTokenController;
 use Illuminate\Http\Request;
@@ -28,9 +29,12 @@ Route::prefix('v1')->group(function(){
         Route::post('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPassword'])->name('forgotPassword');
         Route::post('/reset-password-token', [ResetPasswordTokenController::class, 'resetPassword'])->name('resetPassword');
+
+
+        Route::group(['middleware' => ['jwt.verify', 'is_user']], static function () {
+            Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+        });
     });
     
-    Route::group(['middleware' => ['jwt.verify', 'is_user']], static function () {
-
-    });
+    
 });
