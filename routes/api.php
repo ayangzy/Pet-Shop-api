@@ -29,4 +29,8 @@ Route::prefix('v1')->group(function(){
         Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPassword'])->name('forgotPassword');
         Route::post('/reset-password-token', [ResetPasswordTokenController::class, 'resetPassword'])->name('resetPassword');
     });
+    
+    Route::group(['middleware' => ['jwt.verify', 'is_user']], static function () {
+
+    });
 });
