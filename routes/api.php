@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\ResetPasswordTokenController;
 use App\Http\Controllers\User\DeleteUserController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::prefix('v1')->group(function(){
 
 
         Route::group(['middleware' => ['jwt.verify', 'is_user']], static function () {
+            Route::get('/', [ProfileController::class, 'profile'])->name('profile');
             Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
             Route::delete('/', [DeleteUserController::class, 'delete'])->name('delete');
         });

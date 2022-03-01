@@ -1,9 +1,8 @@
 <?php
 
-namespace Tests\Unit\Auth;
+namespace Tests\Unit\User;
 
 use Tests\TestCase;
-use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
