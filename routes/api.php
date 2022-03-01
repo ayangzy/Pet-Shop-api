@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\ResetPasswordTokenController;
+use App\Http\Controllers\User\DeleteUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +20,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::prefix('v1')->group(function(){
     Route::prefix('user')->name('user.')->group(function(){
@@ -33,6 +31,7 @@ Route::prefix('v1')->group(function(){
 
         Route::group(['middleware' => ['jwt.verify', 'is_user']], static function () {
             Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+            Route::delete('/', [DeleteUserController::class, 'delete'])->name('delete');
         });
     });
     

@@ -7,21 +7,21 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class LogoutTest extends TestCase
+class DeleteUserAccountTest extends TestCase
 {
     use WithFaker;
     use RefreshDatabase;
     /**
-     * Tests that users can log out
+     * Tests that users can delete account
      *
      * @return void
      */
-    
-    public function test_user_can_logout(): void
+
+    public function test_user_can_delete_account()
     {
         $response = $this->asAuthorisedUser()
-        ->json('POST', '/api/v1/user/logout');
+        ->json('DELETE', '/api/v1/user');
         $response->assertStatus(200);
-
     }
+
 }
