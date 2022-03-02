@@ -3,22 +3,16 @@
 namespace App\Http\Actions\Product;
 
 use App\Models\Product;
-use Illuminate\Support\Str;
 use App\Traits\ApiResponses;
-use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
 class UpdateProductAction
 {
     use ApiResponses;
 
-    public function execute(UpdateProductRequest $request, $uuid)
+    public function execute(UpdateProductRequest $request, Product $product)
     {
-      $product = Product::where('uuid', $uuid)->first();
-      
-      if(!$product){
-          abort($this->notFoundAlert('product not found'));
-      }
+
         $productUpdate = $product->update([
             'category_uuid' => $request->category_uuid,
             'title' => $request->title,

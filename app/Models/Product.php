@@ -16,4 +16,9 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'category_uuid', 'uuid');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 }

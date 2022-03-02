@@ -57,10 +57,10 @@ class UpdateProductController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function update(UpdateProductRequest $request, UpdateProductAction $updateProductAction, $uuid)
+    public function update(UpdateProductRequest $request, UpdateProductAction $updateProductAction, Product $uuid)
     {
         
         $updateProductAction->execute($request, $uuid);
-        return $this->successResponse('Product updated successfully');
+        return $this->successResponse('Product updated successfully', new ProductResource($uuid));
     }
 }

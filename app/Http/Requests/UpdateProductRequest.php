@@ -26,10 +26,18 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'category_uuid' => ['filled', 'uuid', 'max:255', 'exists:categories,uuid'],
-            'title' => ['filled', 'string', 'max:255'],
+            'title' => ['filled', 'string', 'max:255', Rule::unique('products')->ignore($this->uuid)],
             'price' => ['filled', 'numeric'],
             'description' => ['filled', 'string', 'max:255'],
             'metadata' => ['filled', 'json']
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+            'title.unique' => 'Product with this title is already added',
         ];
     }
 }
