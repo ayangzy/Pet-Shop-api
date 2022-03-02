@@ -5,17 +5,18 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\OrderListController;
+use App\Http\Controllers\File\FileUploadController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditProfileController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Admin\AdminListUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\Admin\AdminLoginController;
-use App\Http\Controllers\Auth\Admin\AdminLogoutController;
 use App\Http\Controllers\Product\CreateProductController;
 use App\Http\Controllers\Product\DeleteProductController;
 use App\Http\Controllers\Product\GetAllProductController;
 use App\Http\Controllers\Product\UpdateProductController;
+use App\Http\Controllers\Auth\Admin\AdminLogoutController;
 use App\Http\Controllers\Auth\ResetPasswordTokenController;
 use App\Http\Controllers\Product\GetSingleProductController;
 
@@ -66,5 +67,5 @@ Route::prefix('v1')->group(function(){
     Route::get('/products', [GetAllProductController::class, 'index'])->name('product.index');
     Route::get('/product/{uuid}', [GetSingleProductController::class, 'show'])->name('product.show');
    
-
+    Route::post('/file/upload', [FileUploadController::class, 'upload'])->name('file_upload')->middleware('jwt.verify');
 });
