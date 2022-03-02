@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminListUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\Admin\AdminLoginController;
 use App\Http\Controllers\Product\CreateProductController;
+use App\Http\Controllers\Product\DeleteProductController;
 use App\Http\Controllers\Product\UpdateProductController;
 use App\Http\Controllers\Auth\ResetPasswordTokenController;
 
@@ -54,7 +55,7 @@ Route::prefix('v1')->group(function(){
         Route::prefix('/product')->name('product.')->group(function () {
             Route::post('/create', [CreateProductController::class, 'store'])->name('create');
             Route::put('/{uuid}', [UpdateProductController::class, 'update'])->name('update');
-            //Route::delete('/{uuid}', [DeleteProductController::class, 'delete'])->name('delete');
+            Route::delete('/{uuid}', [DeleteProductController::class, 'delete'])->name('delete');
         });
     });
    
