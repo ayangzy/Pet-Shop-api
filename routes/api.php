@@ -9,6 +9,7 @@ use App\Http\Controllers\File\FileUploadController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditProfileController;
 use App\Http\Controllers\Auth\RegistrationController;
+use App\Http\Controllers\File\FileDownloadController;
 use App\Http\Controllers\Admin\AdminListUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\Admin\AdminLoginController;
@@ -68,4 +69,5 @@ Route::prefix('v1')->group(function(){
     Route::get('/product/{uuid}', [GetSingleProductController::class, 'show'])->name('product.show');
    
     Route::post('/file/upload', [FileUploadController::class, 'upload'])->name('file_upload')->middleware('jwt.verify');
+    Route::get('/file/{uuid}', [FileDownloadController::class, 'download'])->name('file_download');
 });
