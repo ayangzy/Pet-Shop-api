@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Admin\AdminListUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\Admin\AdminLoginController;
+use App\Http\Controllers\Auth\Admin\AdminLogoutController;
 use App\Http\Controllers\Product\CreateProductController;
 use App\Http\Controllers\Product\DeleteProductController;
 use App\Http\Controllers\Product\GetAllProductController;
@@ -42,7 +43,7 @@ Route::prefix('v1')->group(function(){
         Route::group(['middleware' => ['jwt.verify', 'is_user']], static function () {
             Route::get('/', [ProfileController::class, 'profile'])->name('profile');
             Route::put('/edit', [EditProfileController::class, 'editProfile'])->name('editProfile');
-            Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+            Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
             Route::delete('/', [DeleteUserController::class, 'delete'])->name('delete');
             Route::get('/orders', [OrderListController::class, 'show'])->name('order');
         });
@@ -51,6 +52,7 @@ Route::prefix('v1')->group(function(){
     Route::prefix('admin')->group(function () {
         Route::post('/login', [AdminLoginController::class, 'adminLogin'])->name('adminLogin');
         Route::get('/user-listing', [AdminListUserController::class, 'listUser'])->name('listUser')->middleware('is_admin');
+        Route::get('/logout', [AdminLogoutController::class, 'logout'])->name('logout')->middleware(['jwt.verify', 'is_admin']);
     });
 
     Route::group(['middleware' => ['jwt.verify', 'is_admin']], static function () {
