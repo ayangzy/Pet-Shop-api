@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\Admin\AdminLoginController;
 use App\Http\Controllers\Product\CreateProductController;
 use App\Http\Controllers\Product\DeleteProductController;
+use App\Http\Controllers\Product\GetAllProductController;
 use App\Http\Controllers\Product\UpdateProductController;
 use App\Http\Controllers\Auth\ResetPasswordTokenController;
 
@@ -58,6 +59,8 @@ Route::prefix('v1')->group(function(){
             Route::delete('/{uuid}', [DeleteProductController::class, 'delete'])->name('delete');
         });
     });
+
+    Route::get('/products', [GetAllProductController::class, 'index'])->name('index');
    
 
 });

@@ -21,7 +21,7 @@ class ProductResource extends JsonResource
             "title" => $this->title,
             "price" => $this->price,
             "description" => $this->description,
-            "metadata" => $this->metadata,
+            "metadata" => json_decode($this->metadata),
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
         ];
