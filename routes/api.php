@@ -13,6 +13,7 @@ use App\Http\Controllers\File\FileDownloadController;
 use App\Http\Controllers\Admin\AdminListUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\Admin\AdminLoginController;
+use App\Http\Controllers\Category\ListCategoryController;
 use App\Http\Controllers\Product\CreateProductController;
 use App\Http\Controllers\Product\DeleteProductController;
 use App\Http\Controllers\Product\GetAllProductController;
@@ -33,9 +34,9 @@ use App\Http\Controllers\Product\GetSingleProductController;
 */
 
 
-Route::prefix('v1')->group(function(){
+Route::prefix('v1')->group(function () {
 
-    Route::prefix('user')->name('user.')->group(function(){
+    Route::prefix('user')->name('user.')->group(function () {
 
         Route::post('/create', [RegistrationController::class, 'register'])->name('register');
         Route::post('/login', [LoginController::class, 'login'])->name('login');
@@ -50,7 +51,7 @@ Route::prefix('v1')->group(function(){
             Route::get('/orders', [OrderListController::class, 'show'])->name('order');
         });
     });
-    
+
     Route::prefix('admin')->group(function () {
         Route::post('/login', [AdminLoginController::class, 'adminLogin'])->name('adminLogin');
         Route::get('/user-listing', [AdminListUserController::class, 'listUser'])->name('listUser')->middleware('is_admin');
@@ -67,7 +68,9 @@ Route::prefix('v1')->group(function(){
 
     Route::get('/products', [GetAllProductController::class, 'index'])->name('product.index');
     Route::get('/product/{uuid}', [GetSingleProductController::class, 'show'])->name('product.show');
-   
+
     Route::post('/file/upload', [FileUploadController::class, 'upload'])->name('file_upload')->middleware('jwt.verify');
     Route::get('/file/{uuid}', [FileDownloadController::class, 'download'])->name('file_download');
+
+    Route::get('/categories', [ListCategoryController::class, 'show'])->name('categories');
 });
