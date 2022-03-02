@@ -560,6 +560,47 @@
             }
         },
         "/api/v1/product/{uuid}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "List a product",
+                "description": "List a product",
+                "operationId": "singleProduct",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List a product",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "Products"
@@ -733,7 +774,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Products listed successfully",
+                        "description": "Products retrieved successfully",
                         "content": {
                             "application/json": {
                                 "schema": {}

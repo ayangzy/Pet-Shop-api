@@ -16,6 +16,7 @@ use App\Http\Controllers\Product\DeleteProductController;
 use App\Http\Controllers\Product\GetAllProductController;
 use App\Http\Controllers\Product\UpdateProductController;
 use App\Http\Controllers\Auth\ResetPasswordTokenController;
+use App\Http\Controllers\Product\GetSingleProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +61,8 @@ Route::prefix('v1')->group(function(){
         });
     });
 
-    Route::get('/products', [GetAllProductController::class, 'index'])->name('index');
+    Route::get('/products', [GetAllProductController::class, 'index'])->name('product.index');
+    Route::get('/product/{uuid}', [GetSingleProductController::class, 'show'])->name('product.show');
    
 
 });

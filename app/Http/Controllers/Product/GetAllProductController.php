@@ -65,7 +65,7 @@ class GetAllProductController extends Controller
     {
         $products = (new ListActions(Product::class, 'products'))->sortWithoutAuth();
 
-        return $this->successResponse('Product retreived successfully.', [
+        return $this->successResponse('Products retreived successfully.', [
             'product' => ProductResource::collection($products),
             'first_page_url' => $products->url(1),
             'from' => $products->firstItem(),
