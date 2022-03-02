@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\OrderListController;
+use App\Http\Controllers\Brand\ListBrandController;
 use App\Http\Controllers\File\FileUploadController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditProfileController;
@@ -73,4 +74,5 @@ Route::prefix('v1')->group(function () {
     Route::get('/file/{uuid}', [FileDownloadController::class, 'download'])->name('file_download');
 
     Route::get('/categories', [ListCategoryController::class, 'show'])->name('categories');
+    Route::get('/brands', [ListBrandController::class, 'show'])->name('show_brand');
 });
