@@ -4,9 +4,11 @@ namespace Tests\Unit\Order;
 
 use Tests\TestCase;
 use App\Models\Order;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class OrderListTest extends TestCase
 {
+    use WithFaker;
     /**
      * Test user can view order list.
      *
