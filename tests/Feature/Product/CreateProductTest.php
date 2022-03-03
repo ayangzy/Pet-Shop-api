@@ -4,11 +4,8 @@ namespace Tests\Feature\Product;
 
 use Tests\TestCase;
 use App\Models\File;
-use App\Models\User;
 use App\Models\Brand;
-use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Support\Str;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Illuminate\Foundation\Testing\RefreshDatabase;

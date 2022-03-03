@@ -1,9 +1,8 @@
 <?php
 
-namespace Tests\Unit\User;
+namespace Tests\Feature\User;
 
 use Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 
 class EditProfileTest extends TestCase
@@ -14,13 +13,20 @@ class EditProfileTest extends TestCase
      *
      * @return void
      */
-    public function test_that_can_update_user_profile()
+    public function test_that_only_authenticated_user_can_update_profile()
     {
         $userData = $this->userPayload();
         $userData['password_confirmation'] = 'password';
         $response = $this->asAuthorisedUser()
         ->json('PUT', '/api/v1/user/edit', $userData);
         $response->assertStatus(200);
+    }
+
+
+    public function test_that_non_authenticated_user_cannot_update_profile()
+    {
+        $response = $this->json('PUT', '/api/v1/user/edit');
+        $response->assertStatus(401);
     }
 
 

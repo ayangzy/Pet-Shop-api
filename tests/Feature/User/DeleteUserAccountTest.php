@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\User;
+namespace Tests\Feature\User;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -15,11 +15,18 @@ class DeleteUserAccountTest extends TestCase
      * @return void
      */
 
-    public function test_user_can_delete_account()
+    public function test_only_auth_user_can_delete_account()
     {
         $response = $this->asAuthorisedUser()
         ->json('DELETE', '/api/v1/user');
         $response->assertStatus(200);
+    }
+
+    public function test_non_auth_user_cannot_delete_account()
+    {
+        $response = $this->deleteJson('/api/v1/user');
+        
+        $response->assertStatus(401);
     }
 
 }

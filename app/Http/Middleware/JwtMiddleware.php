@@ -29,7 +29,7 @@ class JwtMiddleware
             } elseif ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
                 return $this->badRequestAlert('Token is Expired');
             } else {
-                return $this->badRequestAlert('Authorization Token not found');
+                return $this->unauthorisedRequestAlert('Authorization Token not found');
             }
         }
 

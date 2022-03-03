@@ -36,9 +36,10 @@ class DeleteUserController extends Controller
     public function delete()
     {
         $user = User::find(Auth::user()->id);
+        $user->delete();
         Auth::logout();
-        if ($user->delete()) {
-            return $this->successResponse('User account deleted successfully');
-        }
+        
+        return $this->successResponse('User account deleted successfully');
+        
     }
 }

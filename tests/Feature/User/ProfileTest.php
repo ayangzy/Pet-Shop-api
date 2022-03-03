@@ -1,9 +1,8 @@
 <?php
 
-namespace Tests\Unit\User;
+namespace Tests\Feature\User;
 
 use Tests\TestCase;
-use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 
 class ProfileTest extends TestCase
@@ -14,11 +13,18 @@ class ProfileTest extends TestCase
      *
      * @return void
      */
-    public function test_user_view_profile()
+    public function test_user_view_profile_when_logged_in()
     {
-    
         $this->asAuthorisedUser()
         ->json('GET', '/api/v1/user');
         $this->assertTrue(true);
+    }
+
+
+    public function test_user_cannot_view_profile_without_login()
+    {
+    
+        $response = $this->json('GET', '/api/v1/user');
+        $response->assertStatus(401);
     }
 }
