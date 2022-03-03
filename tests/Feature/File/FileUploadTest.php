@@ -23,7 +23,7 @@ class FileUploadTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.jpg');
 
         $response = $this->postJson('/api/v1/file/upload', [$file]);
-        $response->assertStatus(400);
+        $response->assertStatus(401);
     }
 
     /** 
