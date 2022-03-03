@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class DeleteUserAccountTest extends TestCase
 {
     use WithFaker;
-    use RefreshDatabase;
     /**
      * Tests that users can delete account
      *

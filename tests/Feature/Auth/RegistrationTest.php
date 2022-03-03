@@ -24,13 +24,13 @@ class RegistrationTest extends TestCase
         $this->json('POST', 'api/v1/user/create', [])
             ->assertStatus(422)
             ->assertJson(function (AssertableJson $json) {
-                $json->has('errors')
-                    ->has('errors.email')
-                    ->has('errors.first_name')
-                    ->has('errors.last_name')
-                    ->has('errors.phone_number')
-                    ->has('errors.address')
-                    ->has('errors.password')
+                $json->has('validationErrors')
+                    ->has('validationErrors.email')
+                    ->has('validationErrors.first_name')
+                    ->has('validationErrors.last_name')
+                    ->has('validationErrors.phone_number')
+                    ->has('validationErrors.address')
+                    ->has('validationErrors.password')
                     ->etc();
             });
     }
@@ -43,8 +43,8 @@ class RegistrationTest extends TestCase
         $this->json('POST', 'api/v1/user/create', $userData)
             ->assertStatus(422)
             ->assertJson(function (AssertableJson $json) {
-                $json->has('errors')
-                    ->has('errors.password')->etc();
+                $json->has('validationErrors')
+                    ->has('validationErrors.password')->etc();
             });
     }
 

@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Mail\ForgotPasswordMailable;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\Fluent\AssertableJson;
@@ -14,6 +15,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ForgotPasswordTest extends TestCase
 {
     use WithFaker;
+    use DatabaseMigrations;
 
     public function test_it_will_send_an_email_to_user_with_reset_password_token()
     {

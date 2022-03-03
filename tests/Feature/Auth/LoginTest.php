@@ -18,9 +18,9 @@ class LoginTest extends TestCase
         $this->json('POST', 'api/v1/user/login', [])
             ->assertStatus(422)
             ->assertJson(function (AssertableJson $json) {
-                $json->has('errors')
-                    ->has('errors.email')
-                    ->has('errors.password')
+                $json->has('validationErrors')
+                    ->has('validationErrors.email')
+                    ->has('validationErrors.password')
                     ->etc();
             });
     }

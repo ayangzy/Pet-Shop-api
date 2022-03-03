@@ -28,12 +28,12 @@ class CreateProductTest extends TestCase
         $this->actingAsAdmin()->json('POST', 'api/v1/product/create', [])
             ->assertStatus(422)
             ->assertJson(function (AssertableJson $json) {
-                $json->has('errors')
-                    ->has('errors.title')
-                    ->has('errors.price')
-                    ->has('errors.description')
-                    ->has('errors.metadata')
-                    ->has('errors.category_uuid')
+                $json->has('validationErrors')
+                    ->has('validationErrors.title')
+                    ->has('validationErrors.price')
+                    ->has('validationErrors.description')
+                    ->has('validationErrors.metadata')
+                    ->has('validationErrors.category_uuid')
                     ->etc();
             });
     }

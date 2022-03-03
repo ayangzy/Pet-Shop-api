@@ -3,6 +3,7 @@
 namespace Tests\Unit\User;
 
 use Tests\TestCase;
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 
 class ProfileTest extends TestCase
@@ -15,6 +16,7 @@ class ProfileTest extends TestCase
      */
     public function test_user_view_profile()
     {
+    
         $this->asAuthorisedUser()
         ->json('GET', '/api/v1/user');
         $this->assertTrue(true);
