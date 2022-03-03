@@ -53,8 +53,8 @@ class ForgotPasswordTest extends TestCase
         $this->post('api/v1/user/forgot-password', [] )
         ->assertStatus(422)
         ->assertJson(function (AssertableJson $json) {
-            $json->has('errors')
-                ->has('errors.email')
+            $json->has('validationErrors')
+                ->has('validationErrors.email')
                 ->etc();
         });
 
