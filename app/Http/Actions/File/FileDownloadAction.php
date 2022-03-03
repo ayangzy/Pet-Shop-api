@@ -6,7 +6,7 @@ use App\Models\File;
 use App\Traits\ApiResponses;
 use Illuminate\Support\Facades\Storage;
 
-class FIleDownloadAction
+class FileDownloadAction
 {
     use ApiResponses;
     /**
@@ -16,6 +16,7 @@ class FIleDownloadAction
      */
     public function execute(File $file)
     {
+
         $storage = Storage::disk('pet_shop');
         $exist = $storage->exists($file->path);
 

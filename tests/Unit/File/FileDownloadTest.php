@@ -7,7 +7,7 @@ use App\Models\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-class FileDonwloadTest extends TestCase
+class FileDownloadTest extends TestCase
 {
 
     /**
