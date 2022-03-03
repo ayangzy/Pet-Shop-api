@@ -15,7 +15,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ForgotPasswordTest extends TestCase
 {
     use WithFaker;
-    use DatabaseMigrations;
+    
 
     public function test_it_will_send_an_email_to_user_with_reset_password_token()
     {
@@ -48,7 +48,7 @@ class ForgotPasswordTest extends TestCase
         $response->assertOk();
     }
 
-    public function it_requires_email_for_password_rest()
+    public function it_requires_email_for_password_reset()
     {
         $this->post('api/v1/user/forgot-password', [] )
         ->assertStatus(422)

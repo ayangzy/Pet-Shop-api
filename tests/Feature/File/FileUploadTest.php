@@ -4,12 +4,14 @@ namespace Tests\Feature\File;
 
 use Tests\TestCase;
 use App\Models\File;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 class FileUploadTest extends TestCase
 {
+    use WithFaker;
     /**
      * Testing for file uploads.
      *

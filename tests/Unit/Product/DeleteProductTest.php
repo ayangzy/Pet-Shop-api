@@ -17,8 +17,7 @@ class DeleteProductTest extends TestCase
     public function test_delete_product()
     {
         $product = Product::factory()->create();
-        $response = 
-        $this->actingAsAdmin()
+        $response = $this->actingAsAdmin()
         ->deleteJson('api/v1/product/'.$product->uuid);
         $response->assertStatus(200);
     }

@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GetSingleProductTest extends TestCase
 {/**
-     * Test for getting single products.
+     * Test for getting single product.
      *
      * @return void
      */

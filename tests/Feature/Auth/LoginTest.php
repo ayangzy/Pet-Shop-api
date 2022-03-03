@@ -11,7 +11,6 @@ use Illuminate\Testing\Fluent\AssertableJson;
 class LoginTest extends TestCase
 {
     use WithFaker;
-    use RefreshDatabase;
 
     public function test_returns_errors_if_email_and_password_fields_empty()
     {

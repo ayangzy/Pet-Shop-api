@@ -40,6 +40,14 @@ class CreateProductTest extends TestCase
 
     public function test_admin_can_create_a_new_product_successfully()
     {
+        $payload = $this->productData();
+        $response = $this->actingAsAdmin()
+        ->json('POST', '/api/v1/product/create', $payload);
+        $response->assertStatus(201);
+    }
+
+    private function productData()
+    {
         $payload = [
             'title' => $this->faker()->sentence(),
             'title' => $this->faker->unique()->sentence(),
@@ -51,8 +59,7 @@ class CreateProductTest extends TestCase
                 "image" => File::factory()->create()->uuid
             ])
         ];
-        $response = $this->actingAsAdmin()
-        ->json('POST', '/api/v1/product/create', $payload);
-        $response->assertStatus(201);
+
+        return $payload;
     }
 }
