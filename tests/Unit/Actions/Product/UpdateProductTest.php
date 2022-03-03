@@ -24,8 +24,8 @@ class UpdateProductTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $productUuid =  Product::factory()->create();
-        $this->newInstanceOfClass = new UpdateProductAction($this->request(), $productUuid);
+        $this->productUuid =  Product::factory()->create();
+        $this->newInstanceOfClass = new UpdateProductAction($this->request(),  $this->productUuid);
     }
 
     /**
@@ -35,8 +35,7 @@ class UpdateProductTest extends TestCase
      */
     public function test_execute_method_for_product_update_should_return_true()
     {
-        $product = Product::factory()->create();
-        $this->assertTrue($this->newInstanceOfClass->execute($this->request(), $product));
+        $this->assertTrue($this->newInstanceOfClass->execute($this->request(), $this->productUuid ));
     }
 
     /**
