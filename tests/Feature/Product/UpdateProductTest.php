@@ -30,6 +30,15 @@ class UpdateProductTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_user_cannot_update_product_without_permission()
+    {
+        $product = Product::factory()->create();
+        $payload = $this->updateProductPayload();
+
+        $response = $this->putJson('/api/v1/product/'.$product->uuid, $payload);
+        $response->assertStatus(400);
+    }
+
 
     private function updateProductPayload()
     {

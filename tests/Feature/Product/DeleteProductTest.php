@@ -21,4 +21,11 @@ class DeleteProductTest extends TestCase
         ->deleteJson('api/v1/product/'.$product->uuid);
         $response->assertStatus(200);
     }
+
+    public function test_returns_404_if_product_not_found_to_delete()
+    {
+        $response = $this->actingAsAdmin()
+        ->deleteJson('api/v1/product');
+        $response->assertStatus(404);
+    }
 }
