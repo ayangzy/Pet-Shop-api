@@ -36,6 +36,7 @@ class ProfileController extends Controller
     public function profile()
     {
         $user = new UserResource(auth()->user());
+        
         return $this->successResponse('User profile retrieved successfully', $user);
     }
 }

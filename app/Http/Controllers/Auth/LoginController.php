@@ -47,6 +47,7 @@ class LoginController extends Controller
     public function login(LoginRequest $request, LoginAction $loginAction)
     {
         $user = $loginAction->execute($request);
+        
         return $this->successResponse('User loggedIn successfulyy', $user);
     }
 }

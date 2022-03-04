@@ -61,6 +61,7 @@ class UpdateProductController extends Controller
     {
         
         $updateProductAction->execute($request, $uuid);
+        
         return $this->successResponse('Product updated successfully', new ProductResource($uuid));
     }
 }

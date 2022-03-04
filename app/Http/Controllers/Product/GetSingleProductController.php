@@ -43,9 +43,11 @@ class GetSingleProductController extends Controller
     public function show($uuid)
     {
         $product = Product::where('uuid', $uuid)->first();
+
         if (!$product) {
             return $this->notFoundAlert('Product not found');
         }
+
         return $this->successResponse('Product retreived successfully.', new ProductResource($product));
     }
 }

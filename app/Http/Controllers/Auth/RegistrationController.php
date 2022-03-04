@@ -62,6 +62,7 @@ class RegistrationController extends Controller
     {
         $user = $registrationAction->execute($request);
         $user->token = $this->generateToken($user);
+        
         return $this->createdResponse('User registration created successfully', new RegisterResource($user));
     }
 }

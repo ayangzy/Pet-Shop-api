@@ -29,8 +29,11 @@ class LoginAction
                 'token' => $token,
             ];
             $this->updateUserLog($user);
+
             $this->updateOrCreateJwtToken($user);
+
             return  $authUser;
+            
         } catch (JWTException $exception) {
             logger('Unable to create token.', [$exception->getMessage()]);
         }
@@ -40,7 +43,9 @@ class LoginAction
     private function findUser($request)
     {
         $user = User::where('email', $request->email)->first();
+
         abort_if($user && $user->is_admin === 1, $this->unauthorisedRequestAlert('Access denied for this user'));
+
         return $user;
     }
 

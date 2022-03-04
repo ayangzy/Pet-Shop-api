@@ -42,9 +42,11 @@ class DeleteProductController extends Controller
     public function delete($uuid)
     {
         $product = Product::where('uuid', $uuid)->first();
-        if(!$product){
+
+        if (!$product) {
             return $this->badRequestAlert('Product not found');
         }
+
         $product->delete();
 
         return $this->successResponse('Product deleted successfully');

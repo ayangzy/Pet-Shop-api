@@ -34,6 +34,7 @@ class LogoutController extends Controller
     public function logout()
     {
         auth()->logout();
+        
         return $this->successResponse('User logged out successfully');
     }
 }

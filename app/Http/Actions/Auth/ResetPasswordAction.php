@@ -26,6 +26,7 @@ class ResetPasswordAction
 
         $userToken = PasswordReset::where('token', $request->token)
             ->where('email', $request->email)->first();
+
         if (!$userToken) {
 
             abort($this->notFoundAlert('Invalid token.'));
