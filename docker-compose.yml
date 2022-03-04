@@ -1,0 +1,68 @@
+version: '3.6'
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
+    container_name: petshop_api
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - petshop_network
+
+  # #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    env_file:
+      - ./.env
+    ports:
+      - "8002:80"
+      - "44333:443"
+    networks:
+      - petshop_network
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: petshop_db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "33065:3306"
+    environment:
+      MYSQL_DATABASE: petshop_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rock@123
+      MYSQL_ROOT_PASSWORD: rock@123
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+    networks:
+      - petshop_network
+
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+#Docker Networks
+networks:
+  petshop_network:
+    driver: bridge
+    
+
+volumes:
+  mysqldata:
