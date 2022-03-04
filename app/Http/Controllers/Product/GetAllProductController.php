@@ -61,7 +61,7 @@ class GetAllProductController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         $products = (new ListActions(Product::class, 'products'))->sortWithoutAuth();
 

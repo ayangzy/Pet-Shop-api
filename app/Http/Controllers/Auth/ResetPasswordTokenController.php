@@ -48,9 +48,10 @@ class ResetPasswordTokenController extends Controller
      * )
      */
 
-    public function resetPassword(ResetPasswordRequest $request, ResetPasswordAction $resetPasswordAction)
-    {
-
+    public function resetPassword(
+        ResetPasswordRequest $request,
+        ResetPasswordAction $resetPasswordAction
+    ): \Illuminate\Http\JsonResponse {
         $resetPasswordAction->execute($request);
 
         return $this->successResponse('Password reset successfully.');

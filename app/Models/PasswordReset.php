@@ -17,6 +17,7 @@ class PasswordReset extends Model
 
     public function isExpired()
     {
+        
         if (now()->diffInMinutes($this->created_at) > 10) {
             return false;
         }

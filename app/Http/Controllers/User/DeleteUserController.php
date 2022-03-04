@@ -33,13 +33,13 @@ class DeleteUserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function delete()
+    public function delete(): \Illuminate\Http\JsonResponse
     {
-        $user = User::find(Auth::user()->id);
+        $user = User::query()->find(Auth::id());
         $user->delete();
         Auth::logout();
-        
+
         return $this->successResponse('User account deleted successfully');
-        
+
     }
 }

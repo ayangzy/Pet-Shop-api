@@ -31,10 +31,10 @@ class LogoutController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function logout()
+    public function logout(): \Illuminate\Http\JsonResponse
     {
         auth()->logout();
-        
+
         return $this->successResponse('User logged out successfully');
     }
 }

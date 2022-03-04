@@ -11,7 +11,7 @@ class File extends Model
 
     protected $guarded = [];
 
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'uuid';
     }

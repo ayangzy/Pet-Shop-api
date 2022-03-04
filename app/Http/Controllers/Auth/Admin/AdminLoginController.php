@@ -10,7 +10,7 @@ use App\Http\Actions\Auth\Admin\AdminLoginAction;
 class AdminLoginController extends Controller
 {
     use ApiResponses;
-     /**
+    /**
      * @OA\Post(
      * path="/api/v1/admin/login",
      * operationId="Login",
@@ -44,9 +44,12 @@ class AdminLoginController extends Controller
      * )
      */
 
-    public function adminLogin(LoginRequest $request, AdminLoginAction $loginAction)
-    {
+    public function adminLogin(
+        LoginRequest $request,
+        AdminLoginAction $loginAction
+    ): \Illuminate\Http\JsonResponse {
         $user = $loginAction->execute($request);
-        return $this->successResponse('Admin logged In successfulyy', $user);
+
+        return $this->successResponse('Admin logged In successfully', $user);
     }
 }

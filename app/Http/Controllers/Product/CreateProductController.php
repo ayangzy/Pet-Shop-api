@@ -11,7 +11,7 @@ use App\Http\Actions\Product\CreateProductAction;
 class CreateProductController extends Controller
 {
     use ApiResponses;
-   /**
+    /**
      * @OA\Post(
      * path="/api/v1/product/create",
      * operationId="CreateProduct",
@@ -48,8 +48,10 @@ class CreateProductController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function store(CreateProductRequest $request, CreateProductAction $createProductAction)
-    {
+    public function store(
+        CreateProductRequest $request,
+        CreateProductAction $createProductAction
+    ): \Illuminate\Http\JsonResponse {
         $product = $createProductAction->execute($request);
 
         return $this->createdResponse('Product Created successfully', new ProductResource($product));

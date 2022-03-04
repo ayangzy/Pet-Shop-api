@@ -63,7 +63,7 @@ class ListBrandController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function show()
+    public function show(): \Illuminate\Http\JsonResponse
     {
         $brands = (new ListActions(Brand::class, 'brands'))->sortWithoutAuth();
 

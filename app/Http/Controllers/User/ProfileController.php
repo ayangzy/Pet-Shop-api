@@ -33,10 +33,10 @@ class ProfileController extends Controller
      * )
      */
 
-    public function profile()
+    public function profile(): \Illuminate\Http\JsonResponse
     {
         $user = new UserResource(auth()->user());
-        
+
         return $this->successResponse('User profile retrieved successfully', $user);
     }
 }

@@ -40,9 +40,9 @@ class GetSingleProductController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function show($uuid)
+    public function show($uuid): \Illuminate\Http\JsonResponse
     {
-        $product = Product::where('uuid', $uuid)->first();
+        $product = Product::query()->where('uuid', $uuid)->first();
 
         if (!$product) {
             return $this->notFoundAlert('Product not found');

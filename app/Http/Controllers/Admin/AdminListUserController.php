@@ -105,7 +105,7 @@ class AdminListUserController extends Controller
      * )
      */
 
-    public function listUser()
+    public function listUser(): \Illuminate\Http\JsonResponse
     {
         $users = (new ListActions(User::class, 'users'))->sortWithUserFields();
 

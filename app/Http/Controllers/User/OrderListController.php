@@ -62,7 +62,7 @@ class OrderListController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function show()
+    public function show(): \Illuminate\Http\JsonResponse
     {
         $orders = (new ListActions(Order::class, 'orders'))->sortWithAuth();
 

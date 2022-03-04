@@ -10,7 +10,7 @@ use App\Http\Actions\File\FileDownloadAction;
 class FileDownloadController extends Controller
 {
     use ApiResponses;
-     /**
+    /**
      * @OA\Get(
      * path="/api/v1/file/{uuid}",
      * operationId="downloadFile",
@@ -38,8 +38,10 @@ class FileDownloadController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function download(FileDownloadAction $fileDownloadAction, File $uuid)
-    {
+    public function download(
+        FileDownloadAction $fileDownloadAction,
+        File $uuid
+    ) {
         $file =  $fileDownloadAction->execute($uuid);
 
         return $file->download($uuid->path, $uuid->name);

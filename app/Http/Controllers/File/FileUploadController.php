@@ -44,8 +44,10 @@ class FileUploadController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function upload(FileUploadRequest $request, FileUploadAction $fIleUploadAction)
-    {
+    public function upload(
+        FileUploadRequest $request,
+        FileUploadAction $fIleUploadAction
+    ): \Illuminate\Http\JsonResponse {
         $file = $fIleUploadAction->execute($request);
 
         return $this->successResponse('File created successfully',  new FileUploadResource($file));

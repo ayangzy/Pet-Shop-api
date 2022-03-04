@@ -44,8 +44,10 @@ class ForgotPasswordController extends Controller
      * )
      */
 
-    public function forgotPassword(ForgotPasswordRequest $request, ForgotPasswordAction $forgotPasswordAction)
-    {
+    public function forgotPassword(
+        ForgotPasswordRequest $request,
+        ForgotPasswordAction $forgotPasswordAction
+    ): \Illuminate\Http\JsonResponse {
 
         $forgotPasswordAction->execute($request);
 

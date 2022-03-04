@@ -58,11 +58,13 @@ class RegistrationController extends Controller
      * )
      */
 
-    public function register(RegisterUserRequest $request, RegisterUserAction $registrationAction)
-    {
+    public function register(
+        RegisterUserRequest $request,
+        RegisterUserAction $registrationAction
+    ): \Illuminate\Http\JsonResponse {
         $user = $registrationAction->execute($request);
         $user->token = $this->generateToken($user);
-        
+
         return $this->createdResponse('User registration created successfully', new RegisterResource($user));
     }
 }

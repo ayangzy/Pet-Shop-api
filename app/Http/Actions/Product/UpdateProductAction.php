@@ -10,8 +10,10 @@ class UpdateProductAction
 {
     use ApiResponses;
 
-    public function execute(UpdateProductRequest $request, Product $product)
-    {
+    public function execute(
+        UpdateProductRequest $request,
+        Product $product
+    ) {
 
         $productUpdate = $product->update([
             'category_uuid' => $request->category_uuid,
@@ -20,7 +22,7 @@ class UpdateProductAction
             'description' => $request->description,
             'metadata' => $request->metadata,
         ]);
-        
+
         abort_if(!$product, $this->badRequestAlert('Unable to update product. Try again'));
 
         return $productUpdate;

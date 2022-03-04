@@ -53,8 +53,10 @@ class EditProfileController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function editProfile(EditProfileRequest $request, EditProfileAction $editProfileAction)
-    {
+    public function editProfile(
+        EditProfileRequest $request,
+        EditProfileAction $editProfileAction
+    ): \Illuminate\Http\JsonResponse {
         $editProfileAction->execute($request, auth()->user());
 
         return $this->successResponse('Profile updated successfully', new UserResource(auth()->user()));

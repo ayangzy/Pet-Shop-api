@@ -39,9 +39,9 @@ class DeleteProductController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function delete($uuid)
+    public function delete($uuid): \Illuminate\Http\JsonResponse
     {
-        $product = Product::where('uuid', $uuid)->first();
+        $product = Product::query()->where('uuid', $uuid)->first();
 
         if (!$product) {
             return $this->badRequestAlert('Product not found');

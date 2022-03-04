@@ -11,7 +11,7 @@ class FileDownloadAction
     use ApiResponses;
     /**
      * @param mixed $file
-     * 
+     *
      * @return object
      */
     public function execute(File $file)

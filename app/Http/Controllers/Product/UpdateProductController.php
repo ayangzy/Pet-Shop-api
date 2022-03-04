@@ -13,7 +13,7 @@ use App\Http\Actions\Product\UpdateProductAction;
 class UpdateProductController extends Controller
 {
     use ApiResponses;
-     /**
+    /**
      * @OA\Put(
      * path="/api/v1/product/{uuid}",
      * operationId="updateProduct",
@@ -57,11 +57,13 @@ class UpdateProductController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function update(UpdateProductRequest $request, UpdateProductAction $updateProductAction, Product $uuid)
-    {
-        
+    public function update(
+        UpdateProductRequest $request,
+        UpdateProductAction $updateProductAction,
+        Product $uuid
+    ): \Illuminate\Http\JsonResponse {
         $updateProductAction->execute($request, $uuid);
-        
+
         return $this->successResponse('Product updated successfully', new ProductResource($uuid));
     }
 }
