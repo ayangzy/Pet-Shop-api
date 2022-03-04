@@ -12,7 +12,7 @@ class RegisterUserAction
 {
     use ApiResponses;
 
-    public function execute(RegisterUserRequest $request): \Illuminate\Http\JsonResponse
+    public function execute(RegisterUserRequest $request)
     {
         $user = $this->saveDetails($request);
 
