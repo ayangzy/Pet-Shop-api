@@ -14,13 +14,12 @@ use App\Http\Requests\ForgotPasswordRequest;
 class ForgotPasswordAction
 {
     use ApiResponses;
-    
+
     public function execute(ForgotPasswordRequest $request)
     {
+        $user = User::query()->where('email', $request->email)->first();
 
-        $user = User::where('email', $request->email)->first();
-
-        if (! $user) {
+        if (!$user) {
             abort($this->notFoundAlert('Account could not be found.'));
         }
 
@@ -33,8 +32,6 @@ class ForgotPasswordAction
         Mail::to($user->email)->send(new ForgotPasswordMailable($user, $tokenData->token));
 
         return $tokenData;
-
-        
     }
 
 
@@ -46,5 +43,5 @@ class ForgotPasswordAction
         return strtoupper(Str::random(6));
     }
 
-  
+
 }

@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Storage;
 class FileDownloadAction
 {
     use ApiResponses;
+
     /**
      * @param mixed $file
      *
      * @return object
      */
-    public function execute(File $file)
+    public function execute(File $file): object
     {
-
         $storage = Storage::disk('pet_shop');
         $exist = $storage->exists($file->path);
 

@@ -12,12 +12,12 @@ class EditProfileAction
 {
     use ApiResponses;
 
-    public function execute(EditProfileRequest $request, User $user)
+    public function execute(EditProfileRequest $request, User $user): bool
     {
         return $this->updateProfile($request, $user);
     }
 
-    private function updateProfile($payload, User $user)
+    private function updateProfile($payload, User $user): bool
     {
         $user = $user->update([
             'first_name' => $payload->first_name,

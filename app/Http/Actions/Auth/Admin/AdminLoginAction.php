@@ -34,16 +34,16 @@ class AdminLoginAction
             $this->updateOrCreateJwtToken($user);
 
             return  $authUser;
-            
+
         } catch (JWTException $exception) {
             logger('Unable to create token.', [$exception->getMessage()]);
         }
     }
 
 
-    private function findUser($request)
+    private function findUser($request): object
     {
-        $user = User::where('email', $request->email)->first();
+        $user = User::query()->where('email', $request->email)->first();
 
         abort_if($user && $user->is_admin === 0, $this->unauthorisedRequestAlert('Access denied for this user'));
 
@@ -54,7 +54,7 @@ class AdminLoginAction
     /**
      * @param User $user
      */
-    private function updateUserLog(User $user)
+    private function updateUserLog(User $user): bool
     {
         return $user->update([
             'last_login_at' => now(),
@@ -64,19 +64,17 @@ class AdminLoginAction
 
     /**
      * @param User $user
-     * 
+     *
      * @return object
      */
     private function updateOrCreateJwtToken(User $user): object
     {
-        $jwtToken = $user->jwtToken()->updateOrCreate(
+        return $user->jwtToken()->updateOrCreate(
             ['user_id' => $user->id,],
             [
                 'unique_id' => Str::uuid(),
                 'token_title' => "User login authentication",
             ]
         );
-
-        return $jwtToken;
     }
 }

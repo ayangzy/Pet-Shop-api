@@ -2,9 +2,11 @@
 
 namespace App\Http\Actions\Auth;
 
+use App\Http\Requests\Request;
 use App\Models\User;
 use App\Traits\ApiResponses;
 use App\Models\PasswordReset;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ResetPasswordRequest;
 
@@ -17,14 +19,14 @@ class ResetPasswordAction
         /**
          * This method is to reset user's password.
          *
-         * @param \App\Http\Requests\Request $request
+         * @param Request $request
          *
-         * @return \Illuminate\Http\JsonResponse
+         * @return JsonResponse
          *
          * @throws \Exception
          */
 
-        $userToken = PasswordReset::where('token', $request->token)
+        $userToken = PasswordReset::query()->where('token', $request->token)
             ->where('email', $request->email)->first();
 
         if (!$userToken) {
