@@ -34,7 +34,8 @@ use App\Http\Controllers\Product\GetSingleProductController;
 |
 */
 
-
+Route::group(['middleware' => ['XSS']], function (){
+    
 Route::prefix('v1')->group(function () {
 
     Route::prefix('user')->name('user.')->group(function () {
@@ -75,4 +76,6 @@ Route::prefix('v1')->group(function () {
 
     Route::get('/categories', [ListCategoryController::class, 'show'])->name('categories');
     Route::get('/brands', [ListBrandController::class, 'show'])->name('show_brand');
+});
+
 });
