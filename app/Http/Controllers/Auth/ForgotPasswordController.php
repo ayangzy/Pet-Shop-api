@@ -13,7 +13,7 @@ class ForgotPasswordController extends Controller
     use ApiResponses;
     /**
      * @OA\Post(
-     * path="/api/v1/user/forget-password",
+     * path="/api/v1/user/forgot-password",
      * operationId="forgetPassword",
      * tags={"User"},
      * summary="Create token for resetting  Password",
@@ -49,7 +49,7 @@ class ForgotPasswordController extends Controller
 
         $forgotPasswordAction->execute($request);
 
-        $message = 'A token has been sent to this email address to reset your password';
+        $message = 'A token has been sent to your email address to reset your password';
 
         return $this->successResponse($message);
     }

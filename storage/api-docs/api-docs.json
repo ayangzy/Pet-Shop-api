@@ -218,7 +218,7 @@
                 ]
             }
         },
-        "/api/v1/user/forget-password": {
+        "/api/v1/user/forgot-password": {
             "post": {
                 "tags": [
                     "User"
