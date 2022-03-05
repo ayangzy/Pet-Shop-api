@@ -30,7 +30,7 @@ services:
       - ./:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     env_file:
-      - ./.env
+      - ./docker.env
     ports:
       - "8002:80"
       - "44333:443"
