@@ -31,7 +31,7 @@ Once you run the above command, your database configuration will be set if you a
 ### Please configure your Mail driver in the env to make the application work correctly.
 You have to also configure your mail drivers in the .env file, in my own case i made use of mailtrap for testing purposes.
 
-### Clearing Cache and Generating key
+### Generating key app key and jwt secret
 Run the following commands either on the project directory or on the docker container ```petshop_api```
 ```
 
