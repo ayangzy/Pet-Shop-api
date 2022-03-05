@@ -28,9 +28,9 @@ class LoginTest extends TestCase
      *
      * @return void
      */
-    public function testExecuteMethodForLoginShouldWork()
+    public function test_execute_method_for_login_should_work()
     {
-        
+
         $this->assertIsArray($this->newInstanceOfClass->execute($this->request()));
     }
 
@@ -45,7 +45,7 @@ class LoginTest extends TestCase
 
         $request->merge([
             'email' =>  $email,
-            'password' => 'password',
+            'password' => 'userpassword',
         ]);
 
         return $request;

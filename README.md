@@ -17,7 +17,7 @@ git clone https://github.com/ayangzy/Pet-shop-api.git
 ```
 After cloning the project, please run this command on the project directory
 ```
-composer update
+composer install
 ```
 ### Configure Environment
 To run the application you must configure the ```.env``` environment file with your database details and mail configurations. Use the following commmand to create .env file. 
@@ -25,10 +25,16 @@ To run the application you must configure the ```.env``` environment file with y
 cp .env.example .env
 
 ```
+
+Run this blow command to generate the application key
+```
+php artisan key:generate
+
+```
 Once you run the above command, your database configuration will be set if you are running your application on docker. However, if you are not running it on docker, please configure your database in the .env file. You can check the default .env.example if you want to manually create the .env file
 
 ### Please configure your Mail driver in the env to make the application work correctly.
-You have to also configure your mail drivers in the .env file
+You have to also configure your mail drivers in the .env file, in my own case i made use of mailtrap for testing purposes.
 
 ### Clearing Cache and Generating key
 Run the following commands either on the project directory or on the docker container ```petshop_api```
@@ -95,14 +101,24 @@ php artisan test
 ```
 
 ## Seeding DB
-Once your database is correctly installed, you can seed your database by running
+Once your database is correctly set up, you can seed your database by running
 ```
 php artisan db:seed
 ```
 
 There is a cron job that truncate and reseed database every day at midnight. It can be triggered by running
 ``` 
-php artisan seeders:regenerate
+php artisan seeder:regenerate
+```
+
+For testing purpose, kindly find below the login credentials:
+Admin login credentials remain
+``` 
+email: admin@buckhill.co.uk  password: admin
+```
+Users: User emails changes, but password remain same, you can get user emails from api/v1/admin/user-listing endpoint.
+``` 
+passowrd: userpassword
 ```
 
 ## Security
