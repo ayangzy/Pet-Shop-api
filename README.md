@@ -34,7 +34,7 @@ You have to also configure your mail drivers in the .env file, in my own case i 
 ### Clearing Cache and Generating key
 Run the following commands either on the project directory or on the docker container ```petshop_api```
 ```
-php artisan optimize
+
 php artisan key:generate
 php artisan jwt:secret
 ```
@@ -43,11 +43,17 @@ Run the following command at this stage to run database migrations
 php artisan migrate
 ```
 
+## Seeding DB
+Once your database is correctly set up, you can seed your database by running
+```
+php artisan db:seed
+```
+
 If you are using docker you can ssh into the container like below
 ```
 docker exec -it petshop_api bash
 ```
-The above command will ssh you into the container to run the commands to clear cache and generate keys for your application  too.
+The above command will ssh you into the container to run the commands and generate keys for your application  too.
 
 ### Note
 If you dont use docker, please type ```php artisan serve```  on the project directory to start your application
@@ -60,7 +66,7 @@ Wait for the application's image to be built completely on docker then run
 ```
 docker-compose up
 ```
-### Clear cache inside container
+### Clear cache inside container if you run into issues
 First Enter into the docker container. Make sure you have successfully build the image wtih the above commands first
 ```
 docker exec -it petshop_api bash
@@ -93,13 +99,11 @@ composer dump-autoload
 To run test test, type the following on the project directory
 
 ``` bash
-php artisan test
+php artisan optimize
 ```
 
-## Seeding DB
-Once your database is correctly set up, you can seed your database by running
-```
-php artisan db:seed
+``` bash
+php artisan test
 ```
 
 There is a cron job that truncate and reseed database every day at midnight. It can be triggered by running
