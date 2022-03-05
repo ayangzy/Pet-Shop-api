@@ -26,11 +26,6 @@ cp .env.example .env
 
 ```
 
-Run this blow command to generate the application key
-```
-php artisan key:generate
-
-```
 Once you run the above command, your database configuration will be set if you are running your application on docker. However, if you are not running it on docker, please configure your database in the .env file. You can check the default .env.example if you want to manually create the .env file
 
 ### Please configure your Mail driver in the env to make the application work correctly.
@@ -90,6 +85,7 @@ If you run into error, run the following commands one after the other either on 
 ``` 
 composer update
 php artisan optimize
+composer dump-autoload
 ```
 
 ## Testing
